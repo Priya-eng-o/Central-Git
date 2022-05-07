@@ -1,0 +1,32 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <math.h>
+    
+int calculate_total_price(std::vector<int> prices, int discount){
+    //Drew Dormann
+    if(prices.size() == 0){return 0;}
+    double totalSum=0.0;
+    //Apply discount on most expensive Item
+    std::sort(prices.begin(),prices.end());
+    double mostExpensiveItem = prices[prices.size()-1] - prices[prices.size()-1]*discount/100.0;
+//Compute the sum with the exception of the last item, where the discount is applied and add discounted last item
+    for(int i = 0; i <  prices.size() - 1;i++){totalSum+=prices[i];}
+    totalSum+=mostExpensiveItem;
+    
+    // Drew Dormann if(abs( condition is unnecessary. double to int conversion already rounds toward 0. 
+    //check if total is float. If so, return the floor
+    //if(abs(totalSum-int(totalSum))>0){
+    //    return floor(totalSum);
+    //}
+    return totalSum;
+}
+    
+int main() {
+    std::vector<int> prices = {10,20,131,40,30};
+    int discount = 20;
+    std::cout << calculate_total_price(prices,discount);
+   return 0;
+}
